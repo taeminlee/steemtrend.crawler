@@ -26,7 +26,7 @@ class Article:
     
 
 def run():
-    conn = dbconn.getConnection()
+    conn = dbconn.get_connection()
     lastId = dbutil.get_last_blockId(conn)
     b = Blockchain()
     for block in b.stream_from(full_blocks=True):
