@@ -1,4 +1,4 @@
 import pymysql.cursors
 
-def getConnection():
+def get_connection():
     return pymysql.connect(host='localhost', user='user', password='password', db='db', cursorclass=pymysql.cursors.DictCursor)
