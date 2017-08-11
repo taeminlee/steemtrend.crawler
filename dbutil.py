@@ -10,4 +10,5 @@ def get_last_blockId(conn):
 def insert_blockId(conn, id, timestamp):
     with conn.cursors as cursor:
         sql = "INSERT INTO maaum_news_st_block (id, timestamp) VALUES (%s, %s)"
-        cursor.execute(sql, (id, str(timestamp))
+        cursor.execute(sql, (id, str(timestamp)))
+    conn.commit()
