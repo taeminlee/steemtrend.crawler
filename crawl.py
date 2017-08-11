@@ -36,8 +36,8 @@ def run():
         for tx in btxs:
             if tx[0] == 'comment' and tx[1]['parent_author'] == '':
                 meta = json.loads(tx[1]['json_metadata'])
-                print(meta['tags'])
                 if "kr" in meta['tags'] and tx[1]['body'].startswith("@@ ", ) == False:
+                    print(meta['tags'])
                     article = Article()
                     article.author = tx[1]['author']
                     article.subject = tx[1]['title']
