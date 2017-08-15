@@ -11,7 +11,9 @@ The crawler used by steemtrend.com
 ## Installation
 
 `pip install steem pymysql mistune beautifulsoup4`
+
 `copy dbconn.py.sample dbconn.py`
+
 edit dbconn.py
 
 ## Run
