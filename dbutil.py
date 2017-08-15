@@ -7,7 +7,7 @@ def get_last_blockId(conn):
         result = cursor.fetchone()
         if result is None:
             return 14267112 # 14267112 / 2017.08.4
-        return result['id']
+        return int(result['id'])
 
 def insert_blockId(conn, id, timestamp):
     with conn.cursor() as cursor:
