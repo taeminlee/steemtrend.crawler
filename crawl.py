@@ -11,6 +11,7 @@ from hashlib import md5
 from steem.blockchain import Blockchain
 from steem.utils import block_num_from_hash
 from bs4 import BeautifulSoup
+from langdetect import detect
 
 class Article:
     subject = ""
@@ -36,7 +37,7 @@ def run():
             if tx[0] == 'comment' and tx[1]['parent_author'] == '':
                 try:                
                     meta = json.loads(tx[1]['json_metadata'])
-                    if 'tags' in meta and "kr" in meta['tags'] and tx[1]['body'].startswith("@@ ", ) == False:
+                    if tx[1]['body'].startswith("@@ ", ) == False:
                         print(meta['tags'])
                         article = Article()
                         article.author = tx[1]['author']
@@ -53,7 +54,8 @@ def run():
                             article.img = meta['image'][0]
                         print(article)
                         try:
-                            dbutil.insert_article(conn, article) 
+                            if detect(article.text) == "ko" :
+                                dbutil.insert_article(conn, article) 
                         except:
                             pass
                 except:

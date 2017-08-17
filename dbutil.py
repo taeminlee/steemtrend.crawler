@@ -19,9 +19,9 @@ def insert_article(conn, article):
     nno = 0
     with conn.cursor() as cursor:
         sql = "INSERT INTO `maaum_news_st`(`url`, `title`, `press`, `gcat`, `gcid`, `img`, `description`, `created_at`, `update_date`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
-        cursor.execute(sql, (article.url, article.subject, article.author, article.hashId, article.hashId, article.img, article.preview, article.created, article.created))
+        cursor.execute(sql, (article.url, article.subject, article.author, article.hashId, article.hashId, article.img, article.text, article.created, article.created))
         nno = cursor.lastrowid
     with conn.cursor() as cursor:
-        sql = "INSERT INTO `maaum_news_st_text`(`nno`, `md`, `text`) VALUES (%s, %s, %s)"
-        cursor.execute(sql, (nno, article.content, article.text))
+        sql = "INSERT INTO `maaum_news_st_raw`(`nno`, `md`, `tags`) VALUES (%s, %s, %s)"
+        cursor.execute(sql, (nno, article.content, str(article.tag)))
     conn.commit()
