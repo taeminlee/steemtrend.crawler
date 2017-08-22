@@ -38,7 +38,6 @@ def run():
                 try:                
                     meta = json.loads(tx[1]['json_metadata'])
                     if tx[1]['body'].startswith("@@ ", ) == False:
-                        print(meta['tags'])
                         article = Article()
                         article.author = tx[1]['author']
                         article.subject = tx[1]['title']
@@ -52,9 +51,9 @@ def run():
                         article.url = "https://steemkr.com/@" + article.author + "/" + tx[1]['permlink']
                         if "image" in meta and len(meta['image']) > 0:
                             article.img = meta['image'][0]
-                        print(article)
                         try:
                             if detect(article.text) == "ko" :
+                                print(meta['tags'])
                                 dbutil.insert_article(conn, article) 
                         except:
                             pass
