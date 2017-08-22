@@ -10,10 +10,13 @@ def get_last_blockId(conn):
         return int(result['id'])
 
 def insert_blockId(conn, id, timestamp):
-    with conn.cursor() as cursor:
-        sql = "INSERT INTO maaum_news_st_block (id, timestamp) VALUES (%s, %s)"
-        cursor.execute(sql, (id, str(timestamp)))
-    conn.commit()
+    try:
+        with conn.cursor() as cursor:
+            sql = "INSERT INTO maaum_news_st_block (id, timestamp) VALUES (%s, %s)"
+            cursor.execute(sql, (id, str(timestamp)))
+        conn.commit()
+    except:
+        pass
 
 def insert_article(conn, article):
     nno = 0
